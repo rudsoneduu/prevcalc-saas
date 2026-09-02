@@ -304,7 +304,7 @@ export default function HomePage() {
           </div>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <h1 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#f8fafc', margin: 0 }}>PrevCalc SaaS Legal Tech Enterprise</h1>
+              <h1 style={{ fontSize: '1.4rem', fontWeight: 800, color: '#f8fafc', margin: 0 }}>PrevCalc SaaS Legal Tech Enterprise</h1>
               <span style={{ backgroundColor: 'rgba(59, 130, 246, 0.2)', color: '#93c5fd', fontSize: '0.75rem', padding: '0.2rem 0.6rem', borderRadius: '9999px', border: '1px solid rgba(147, 197, 253, 0.3)', fontWeight: 600 }}>
                 BACEN SGS Sync Active
               </span>
@@ -326,102 +326,47 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* BANNER NAVEGAÇÃO POR ABAS EXECUTIVAS */}
-      <nav style={{ display: 'flex', gap: '0.5rem', backgroundColor: '#0f172a', padding: '0.5rem', borderRadius: '0.85rem', border: '1px solid #334155', marginBottom: '1.25rem', overflowX: 'auto' }}>
+      {/* BARRA DE NAVEGAÇÃO POR ABAS EXECUTIVAS (REFORMULADA - DESIGN PREMIUM) */}
+      <nav className="nav-tab-container">
         <button
           onClick={() => setAbaAtiva('cnis')}
-          style={{
-            padding: '0.65rem 1.15rem',
-            borderRadius: '0.6rem',
-            border: 'none',
-            fontSize: '0.8rem',
-            fontWeight: 700,
-            cursor: 'pointer',
-            backgroundColor: abaAtiva === 'cnis' ? '#2563eb' : 'transparent',
-            color: abaAtiva === 'cnis' ? '#ffffff' : '#94a3b8',
-            transition: 'all 0.2s ease',
-            whiteSpace: 'nowrap'
-          }}
+          className={`nav-tab-btn ${abaAtiva === 'cnis' ? 'active' : ''}`}
         >
-          📋 Perfil & Extrator CNIS
+          📋 Perfil & CNIS
         </button>
 
         <button
           onClick={() => setAbaAtiva('simulacao')}
-          style={{
-            padding: '0.65rem 1.15rem',
-            borderRadius: '0.6rem',
-            border: 'none',
-            fontSize: '0.8rem',
-            fontWeight: 700,
-            cursor: 'pointer',
-            backgroundColor: abaAtiva === 'simulacao' ? '#2563eb' : 'transparent',
-            color: abaAtiva === 'simulacao' ? '#ffffff' : '#94a3b8',
-            transition: 'all 0.2s ease',
-            whiteSpace: 'nowrap'
-          }}
+          className={`nav-tab-btn ${abaAtiva === 'simulacao' ? 'active' : ''}`}
         >
-          🚀 Simulação & Planilha Data Grid
+          🚀 Simulação & RMI
         </button>
 
         <button
           onClick={() => setAbaAtiva('teses')}
-          style={{
-            padding: '0.65rem 1.15rem',
-            borderRadius: '0.6rem',
-            border: 'none',
-            fontSize: '0.8rem',
-            fontWeight: 700,
-            cursor: 'pointer',
-            backgroundColor: abaAtiva === 'teses' ? '#2563eb' : 'transparent',
-            color: abaAtiva === 'teses' ? '#ffffff' : '#94a3b8',
-            transition: 'all 0.2s ease',
-            whiteSpace: 'nowrap'
-          }}
+          className={`nav-tab-btn ${abaAtiva === 'teses' ? 'active' : ''}`}
         >
-          ⚖️ Regras de Transição (EC 103)
+          ⚖️ Teses EC 103
         </button>
 
         <button
           onClick={() => setAbaAtiva('planejamento')}
-          style={{
-            padding: '0.65rem 1.15rem',
-            borderRadius: '0.6rem',
-            border: 'none',
-            fontSize: '0.8rem',
-            fontWeight: 700,
-            cursor: 'pointer',
-            backgroundColor: abaAtiva === 'planejamento' ? '#2563eb' : 'transparent',
-            color: abaAtiva === 'planejamento' ? '#ffffff' : '#94a3b8',
-            transition: 'all 0.2s ease',
-            whiteSpace: 'nowrap'
-          }}
+          className={`nav-tab-btn ${abaAtiva === 'planejamento' ? 'active' : ''}`}
         >
-          🎯 Planejamento & Guia de Contribuição
+          🎯 Planejamento
         </button>
 
         <button
           onClick={() => setAbaAtiva('complementacao')}
-          style={{
-            padding: '0.65rem 1.15rem',
-            borderRadius: '0.6rem',
-            border: 'none',
-            fontSize: '0.8rem',
-            fontWeight: 700,
-            cursor: 'pointer',
-            backgroundColor: abaAtiva === 'complementacao' ? '#2563eb' : 'transparent',
-            color: abaAtiva === 'complementacao' ? '#ffffff' : '#94a3b8',
-            transition: 'all 0.2s ease',
-            whiteSpace: 'nowrap'
-          }}
+          className={`nav-tab-btn ${abaAtiva === 'complementacao' ? 'active' : ''}`}
         >
-          ⚠️ Guia de Complementação (PREC-MENOR-MIN)
+          ⚠️ Complementação
         </button>
       </nav>
 
       {/* BANNER RECOMENDAÇÃO AUTOMÁTICA DA MODALIDADE & ALERTAS */}
       {recomendacao && (
-        <div style={{ backgroundColor: 'rgba(59, 130, 246, 0.1)', border: '1px solid rgba(59, 130, 246, 0.3)', borderRadius: '1rem', padding: '0.85rem 1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem', marginBottom: '1.25rem' }}>
+        <div style={{ backgroundColor: 'rgba(59, 130, 246, 0.1)', border: '1px solid rgba(59, 130, 246, 0.3)', borderRadius: '1rem', padding: '0.85rem 1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <div style={{ fontSize: '1.5rem' }}>💡</div>
             <div>

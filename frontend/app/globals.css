@@ -42,6 +42,55 @@ header {
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
 }
 
+/* BARRA DE ABAS NAVEGÁVEIS EXECUTIVA (SEM SCROLLBAR BRANCA) */
+.nav-tab-container {
+  display: flex;
+  gap: 0.5rem;
+  background-color: #0f172a;
+  padding: 0.4rem;
+  border-radius: 0.85rem;
+  border: 1px solid #334155;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.nav-tab-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.nav-tab-btn {
+  flex: 1;
+  min-width: 140px;
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.6rem;
+  border: 1px solid transparent;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  background-color: transparent;
+  color: #94a3b8;
+  transition: all 0.2s ease-in-out;
+  white-space: nowrap;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.nav-tab-btn:hover {
+  color: #f8fafc;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.nav-tab-btn.active {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  color: #ffffff;
+  border-color: rgba(147, 197, 253, 0.4);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+}
+
 /* CARDS DE CONTEÚDO */
 .card-panel, .bg-white {
   background-color: #1e293b !important;
@@ -69,7 +118,6 @@ header {
 input, select, textarea {
   background-color: #0f172a !important;
   border: 1px solid #475569 !important;
-  color: #475569 !important;
   color: #f8fafc !important;
   border-radius: 0.75rem !important;
   padding: 0.6rem 0.85rem !important;
