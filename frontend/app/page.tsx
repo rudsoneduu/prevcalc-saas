@@ -322,41 +322,41 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* BARRA DE NAVEGAÇÃO POR ABAS EXECUTIVAS (REFORMULADA - DESIGN PREMIUM) */}
+      {/* BARRA DE NAVEGAÇÃO POR ABAS INTUITIVAS E CLARAS */}
       <nav className="nav-tab-container">
         <button
           onClick={() => setAbaAtiva('cnis')}
           className={`nav-tab-btn ${abaAtiva === 'cnis' ? 'active' : ''}`}
         >
-          📋 Perfil & CNIS
+          📄 1. Importar Extrato (CNIS)
         </button>
 
         <button
           onClick={() => setAbaAtiva('simulacao')}
           className={`nav-tab-btn ${abaAtiva === 'simulacao' ? 'active' : ''}`}
         >
-          🚀 Simulação & RMI
+          📊 2. Histórico de Salários
         </button>
 
         <button
           onClick={() => setAbaAtiva('teses')}
           className={`nav-tab-btn ${abaAtiva === 'teses' ? 'active' : ''}`}
         >
-          ⚖️ Teses EC 103
+          ⚖️ 3. Regras de Aposentadoria
         </button>
 
         <button
           onClick={() => setAbaAtiva('planejamento')}
           className={`nav-tab-btn ${abaAtiva === 'planejamento' ? 'active' : ''}`}
         >
-          🎯 Planejamento
+          🎯 4. Quanto Falta para Aposentar
         </button>
 
         <button
           onClick={() => setAbaAtiva('complementacao')}
           className={`nav-tab-btn ${abaAtiva === 'complementacao' ? 'active' : ''}`}
         >
-          ⚠️ Complementação
+          💰 5. Regularização do INSS
         </button>
       </nav>
 
@@ -377,7 +377,7 @@ export default function HomePage() {
         </div>
       )}
 
-      {/* ABA 1: PERFIL & EXTRATOR CNIS */}
+      {/* ABA 1: IMPORTAR EXTRATO (CNIS) */}
       {abaAtiva === 'cnis' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           <div className="grid-3">
@@ -522,7 +522,7 @@ export default function HomePage() {
         </div>
       )}
 
-      {/* ABA 2: SIMULAÇÃO & PLANILHA DATA GRID */}
+      {/* ABA 2: HISTÓRICO DE SALÁRIOS */}
       {abaAtiva === 'simulacao' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           {/* PLANILHA DATA GRID */}
@@ -651,12 +651,12 @@ export default function HomePage() {
         </div>
       )}
 
-      {/* ABA 3: TESES & REGRAS DE TRANSIÇÃO (EC 103/2019) */}
+      {/* ABA 3: REGRAS DE APOSENTADORIA */}
       {abaAtiva === 'teses' && (
         <TesesComparativasTable teses={teses} />
       )}
 
-      {/* ABA 4: PLANEJAMENTO & GUIA DE CONTRIBUIÇÃO */}
+      {/* ABA 4: QUANTO FALTA PARA APOSENTAR */}
       {abaAtiva === 'planejamento' && (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           {/* PLANEJAMENTO O QUE FALTA PARA APOSENTAR */}
@@ -674,7 +674,7 @@ export default function HomePage() {
         </div>
       )}
 
-      {/* ABA 5: GUIA DE COMPLEMENTAÇÃO (PREC-MENOR-MIN) */}
+      {/* ABA 5: REGULARIZAÇÃO DO INSS */}
       {abaAtiva === 'complementacao' && (
         <ComplementacaoTable itens={itensComplementacao} totalDarf={totalComplementarDarf} />
       )}
