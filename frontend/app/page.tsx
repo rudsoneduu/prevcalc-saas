@@ -1,5 +1,7 @@
 'use client'
 
+export const dynamic = 'force-dynamic'
+
 import React, { useState, useEffect } from 'react'
 import { DataGrid, SalarioItem } from '../components/DataGrid'
 import { CnisPdfUploader } from '../components/CnisPdfUploader'

@@ -4,7 +4,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
-/* ESTILOS DE FALLBACK GARANTIDOS E LAYOUT SAAS LEGAL TECH */
+/* ESTILOS DE FALLBACK GARANTIDOS E LAYOUT SAAS LEGAL TECH DARK MODE FORÇADO */
 
 * {
   box-sizing: border-box;
@@ -12,10 +12,10 @@
   padding: 0;
 }
 
-body {
+html, body {
+  background-color: #0f172a !important;
+  color: #f8fafc !important;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  background-color: #0f172a;
-  color: #f8fafc;
   min-height: 100vh;
   padding: 1.5rem;
 }
@@ -31,8 +31,8 @@ main {
 
 /* HEADER TOP BAR */
 header {
-  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
-  border: 1px solid #334155;
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%) !important;
+  border: 1px solid #334155 !important;
   border-radius: 1rem;
   padding: 1.5rem;
   display: flex;
@@ -46,10 +46,10 @@ header {
 .nav-tab-container {
   display: flex;
   gap: 0.5rem;
-  background-color: #0f172a;
+  background-color: #0f172a !important;
   padding: 0.4rem;
   border-radius: 0.85rem;
-  border: 1px solid #334155;
+  border: 1px solid #334155 !important;
   overflow-x: auto;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
@@ -69,7 +69,7 @@ header {
   font-weight: 700;
   cursor: pointer;
   background-color: transparent;
-  color: #94a3b8;
+  color: #94a3b8 !important;
   transition: all 0.2s ease-in-out;
   white-space: nowrap;
   text-align: center;
@@ -80,15 +80,15 @@ header {
 }
 
 .nav-tab-btn:hover {
-  color: #f8fafc;
-  background-color: rgba(255, 255, 255, 0.05);
+  color: #f8fafc !important;
+  background-color: rgba(255, 255, 255, 0.05) !important;
 }
 
 .nav-tab-btn.active {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-  color: #ffffff;
-  border-color: rgba(147, 197, 253, 0.4);
-  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+  color: #ffffff !important;
+  border-color: rgba(147, 197, 253, 0.4) !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35) !important;
 }
 
 /* CARDS DE CONTEÚDO */
@@ -173,7 +173,7 @@ button {
   max-height: 380px;
   border: 1px solid #334155;
   border-radius: 0.75rem;
-  background-color: #0f172a;
+  background-color: #0f172a !important;
 }
 
 table {
@@ -199,11 +199,11 @@ th {
 td {
   padding: 0.65rem 0.75rem;
   border-bottom: 1px solid #1e293b;
-  color: #e2e8f0;
+  color: #e2e8f0 !important;
 }
 
 tr:hover td {
-  background-color: #1e293b;
+  background-color: #1e293b !important;
 }
 
 /* BADGES E ETIQUETAS */
@@ -211,7 +211,7 @@ tr:hover td {
   display: inline-block;
   white-space: nowrap;
   background-color: rgba(16, 185, 129, 0.15);
-  color: #34d399;
+  color: #34d399 !important;
   border: 1px solid rgba(52, 211, 153, 0.3);
   padding: 0.25rem 0.6rem;
   border-radius: 0.375rem;
@@ -223,7 +223,7 @@ tr:hover td {
   display: inline-block;
   white-space: nowrap;
   background-color: rgba(59, 130, 246, 0.15);
-  color: #60a5fa;
+  color: #60a5fa !important;
   font-weight: 700;
   padding: 0.25rem 0.5rem;
   border-radius: 0.375rem;
