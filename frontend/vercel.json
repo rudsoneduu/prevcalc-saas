@@ -1,7 +1,3 @@
 {
-  "framework": "nextjs",
-  "buildCommand": "npx tsc --noEmit && next build",
-  "env": {
-    "NEXT_PUBLIC_API_URL": "https://prevcalc-backend.onrender.com"
-  }
+  "framework": "nextjs"
 }
