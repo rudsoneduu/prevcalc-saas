@@ -13,6 +13,8 @@ import { TabelaPlanejamentoContribuicao } from '../components/TabelaPlanejamento
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
 
 export default function HomePage() {
+  const [abaAtiva, setAbaAtiva] = useState<'cnis' | 'simulacao' | 'teses' | 'planejamento' | 'complementacao'>('cnis')
+
   const [clienteNome, setClienteNome] = useState('RUDSON EDUARDO DE OLIVEIRA AMARO')
   const [cpf, setCpf] = useState('041.929.711-19')
   const [nit, setNit] = useState('114.45167.11-0')
@@ -324,9 +326,102 @@ export default function HomePage() {
         </div>
       </header>
 
+      {/* BANNER NAVEGAÇÃO POR ABAS EXECUTIVAS */}
+      <nav style={{ display: 'flex', gap: '0.5rem', backgroundColor: '#0f172a', padding: '0.5rem', borderRadius: '0.85rem', border: '1px solid #334155', marginBottom: '1.25rem', overflowX: 'auto' }}>
+        <button
+          onClick={() => setAbaAtiva('cnis')}
+          style={{
+            padding: '0.65rem 1.15rem',
+            borderRadius: '0.6rem',
+            border: 'none',
+            fontSize: '0.8rem',
+            fontWeight: 700,
+            cursor: 'pointer',
+            backgroundColor: abaAtiva === 'cnis' ? '#2563eb' : 'transparent',
+            color: abaAtiva === 'cnis' ? '#ffffff' : '#94a3b8',
+            transition: 'all 0.2s ease',
+            whiteSpace: 'nowrap'
+          }}
+        >
+          📋 Perfil & Extrator CNIS
+        </button>
+
+        <button
+          onClick={() => setAbaAtiva('simulacao')}
+          style={{
+            padding: '0.65rem 1.15rem',
+            borderRadius: '0.6rem',
+            border: 'none',
+            fontSize: '0.8rem',
+            fontWeight: 700,
+            cursor: 'pointer',
+            backgroundColor: abaAtiva === 'simulacao' ? '#2563eb' : 'transparent',
+            color: abaAtiva === 'simulacao' ? '#ffffff' : '#94a3b8',
+            transition: 'all 0.2s ease',
+            whiteSpace: 'nowrap'
+          }}
+        >
+          🚀 Simulação & Planilha Data Grid
+        </button>
+
+        <button
+          onClick={() => setAbaAtiva('teses')}
+          style={{
+            padding: '0.65rem 1.15rem',
+            borderRadius: '0.6rem',
+            border: 'none',
+            fontSize: '0.8rem',
+            fontWeight: 700,
+            cursor: 'pointer',
+            backgroundColor: abaAtiva === 'teses' ? '#2563eb' : 'transparent',
+            color: abaAtiva === 'teses' ? '#ffffff' : '#94a3b8',
+            transition: 'all 0.2s ease',
+            whiteSpace: 'nowrap'
+          }}
+        >
+          ⚖️ Regras de Transição (EC 103)
+        </button>
+
+        <button
+          onClick={() => setAbaAtiva('planejamento')}
+          style={{
+            padding: '0.65rem 1.15rem',
+            borderRadius: '0.6rem',
+            border: 'none',
+            fontSize: '0.8rem',
+            fontWeight: 700,
+            cursor: 'pointer',
+            backgroundColor: abaAtiva === 'planejamento' ? '#2563eb' : 'transparent',
+            color: abaAtiva === 'planejamento' ? '#ffffff' : '#94a3b8',
+            transition: 'all 0.2s ease',
+            whiteSpace: 'nowrap'
+          }}
+        >
+          🎯 Planejamento & Guia de Contribuição
+        </button>
+
+        <button
+          onClick={() => setAbaAtiva('complementacao')}
+          style={{
+            padding: '0.65rem 1.15rem',
+            borderRadius: '0.6rem',
+            border: 'none',
+            fontSize: '0.8rem',
+            fontWeight: 700,
+            cursor: 'pointer',
+            backgroundColor: abaAtiva === 'complementacao' ? '#2563eb' : 'transparent',
+            color: abaAtiva === 'complementacao' ? '#ffffff' : '#94a3b8',
+            transition: 'all 0.2s ease',
+            whiteSpace: 'nowrap'
+          }}
+        >
+          ⚠️ Guia de Complementação (PREC-MENOR-MIN)
+        </button>
+      </nav>
+
       {/* BANNER RECOMENDAÇÃO AUTOMÁTICA DA MODALIDADE & ALERTAS */}
       {recomendacao && (
-        <div style={{ backgroundColor: 'rgba(59, 130, 246, 0.1)', border: '1px solid rgba(59, 130, 246, 0.3)', borderRadius: '1rem', padding: '1rem 1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem' }}>
+        <div style={{ backgroundColor: 'rgba(59, 130, 246, 0.1)', border: '1px solid rgba(59, 130, 246, 0.3)', borderRadius: '1rem', padding: '0.85rem 1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem', marginBottom: '1.25rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
             <div style={{ fontSize: '1.5rem' }}>💡</div>
             <div>
@@ -338,304 +433,309 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-
-          <button onClick={() => setMostrarComplementacao(!mostrarComplementacao)} className="btn-secondary" style={{ backgroundColor: mostrarComplementacao ? 'rgba(239, 68, 68, 0.2)' : 'rgba(30, 41, 59, 0.8)', borderColor: mostrarComplementacao ? '#f87171' : '#475569', color: mostrarComplementacao ? '#fca5a5' : '#cbd5e1', fontSize: '0.75rem' }}>
-            {mostrarComplementacao ? '🙈 Ocultar Tabela Guia' : '👁️ Exibir Guia de Complementação'}
-          </button>
         </div>
       )}
 
-      {/* NOVO CARD HERO DE PLANEJAMENTO PREVIDENCIÁRIO: O QUE FALTA PARA APOSENTAR */}
-      <PlanejamentoAposentadoriaCard
-        nomeSegurado={clienteNome}
-        idadeAtual={idadeAnos}
-        tempoAtual={tempoAnos}
-        sexo={sexo}
-        dataNascimento={dataNascimento}
-        teses={teses}
-      />
+      {/* ABA 1: PERFIL & EXTRATOR CNIS */}
+      {abaAtiva === 'cnis' && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+          <div className="grid-3">
 
-      {/* NOVA TABELA DE PLANEJAMENTO DE CONTRIBUIÇÃO FUTURA (1 A 5 SALÁRIOS & TETO) */}
-      <TabelaPlanejamentoContribuicao />
-
-      {/* PAINEL PERFIL DO SEGURADO E CONTROLES */}
-      <div className="grid-3">
-
-        {/* CARD PERFIL AUTO EXTRAÍDO */}
-        <div className="card-panel">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', borderBottom: '1px solid #334155', paddingBottom: '0.75rem', marginBottom: '1rem' }}>
-            <span style={{ fontSize: '1.2rem' }}>👤</span>
-            <h2 style={{ fontSize: '0.85rem', fontWeight: 700, color: '#f8fafc', textTransform: 'uppercase', letterSpacing: '0.05em', margin: 0 }}>
-              Perfil Auto-Extraído do CNIS
-            </h2>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
-            <div>
-              <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 600, color: '#94a3b8', marginBottom: '0.25rem' }}>Nome do Segurado</label>
-              <input
-                type="text"
-                value={clienteNome}
-                onChange={(e) => setClienteNome(e.target.value)}
-              />
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
-              <div>
-                <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 600, color: '#94a3b8', marginBottom: '0.25rem' }}>CPF</label>
-                <input
-                  type="text"
-                  value={cpf}
-                  onChange={(e) => setCpf(e.target.value)}
-                />
+            {/* CARD PERFIL AUTO EXTRAÍDO */}
+            <div className="card-panel">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', borderBottom: '1px solid #334155', paddingBottom: '0.75rem', marginBottom: '1rem' }}>
+                <span style={{ fontSize: '1.2rem' }}>👤</span>
+                <h2 style={{ fontSize: '0.85rem', fontWeight: 700, color: '#f8fafc', textTransform: 'uppercase', letterSpacing: '0.05em', margin: 0 }}>
+                  Perfil Auto-Extraído do CNIS
+                </h2>
               </div>
 
-              <div>
-                <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 600, color: '#94a3b8', marginBottom: '0.25rem' }}>Nascimento (Idade)</label>
-                <input
-                  type="text"
-                  value={`${dataNascimento} (${idadeAnos}a ${idadeMeses}m)`}
-                  readOnly
-                  style={{ backgroundColor: '#1e293b', color: '#60a5fa', fontWeight: 700 }}
-                />
-              </div>
-            </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
+                <div>
+                  <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 600, color: '#94a3b8', marginBottom: '0.25rem' }}>Nome do Segurado</label>
+                  <input
+                    type="text"
+                    value={clienteNome}
+                    onChange={(e) => setClienteNome(e.target.value)}
+                  />
+                </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
-              <div>
-                <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 600, color: '#94a3b8', marginBottom: '0.25rem' }}>Tempo Contribuição</label>
-                <input
-                  type="text"
-                  value={`${tempoAnos} Anos`}
-                  readOnly
-                  style={{ backgroundColor: '#1e293b', color: '#34d399', fontWeight: 700 }}
-                />
-              </div>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 600, color: '#94a3b8', marginBottom: '0.25rem' }}>CPF</label>
+                    <input
+                      type="text"
+                      value={cpf}
+                      onChange={(e) => setCpf(e.target.value)}
+                    />
+                  </div>
 
-              <div>
-                <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 600, color: '#94a3b8', marginBottom: '0.25rem' }}>Data DIB</label>
-                <input
-                  type="date"
-                  value={dataDib}
-                  onChange={(e) => setDataDib(e.target.value)}
-                />
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 600, color: '#94a3b8', marginBottom: '0.25rem' }}>Nascimento (Idade)</label>
+                    <input
+                      type="text"
+                      value={`${dataNascimento} (${idadeAnos}a ${idadeMeses}m)`}
+                      readOnly
+                      style={{ backgroundColor: '#1e293b', color: '#60a5fa', fontWeight: 700 }}
+                    />
+                  </div>
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem' }}>
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 600, color: '#94a3b8', marginBottom: '0.25rem' }}>Tempo Contribuição</label>
+                    <input
+                      type="text"
+                      value={`${tempoAnos} Anos`}
+                      readOnly
+                      style={{ backgroundColor: '#1e293b', color: '#34d399', fontWeight: 700 }}
+                    />
+                  </div>
+
+                  <div>
+                    <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 600, color: '#94a3b8', marginBottom: '0.25rem' }}>Data DIB</label>
+                    <input
+                      type="date"
+                      value={dataDib}
+                      onChange={(e) => setDataDib(e.target.value)}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
 
-        {/* CARD SELEÇÃO DE MODALIDADE */}
-        <div className="card-panel">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', borderBottom: '1px solid #334155', paddingBottom: '0.75rem', marginBottom: '1rem' }}>
-            <span style={{ fontSize: '1.2rem' }}>⚙️</span>
-            <h2 style={{ fontSize: '0.85rem', fontWeight: 700, color: '#f8fafc', textTransform: 'uppercase', letterSpacing: '0.05em', margin: 0 }}>
-              Modalidade de Cálculo Selecionada
-            </h2>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
-            <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', padding: '0.75rem', borderRadius: '0.75rem', border: modalidade === 'APOSENTADORIA_COMUM' ? '1px solid #3b82f6' : '1px solid #334155', backgroundColor: modalidade === 'APOSENTADORIA_COMUM' ? 'rgba(59, 130, 246, 0.1)' : 'transparent', cursor: 'pointer' }}>
-              <input
-                type="radio"
-                name="modalidade"
-                value="APOSENTADORIA_COMUM"
-                checked={modalidade === 'APOSENTADORIA_COMUM'}
-                onChange={(e) => {
-                  setModalidade(e.target.value)
-                  recalcularTudo(clienteNome, idadeAnos, sexo, tempoAnos, salarios, e.target.value)
-                }}
-                style={{ width: 'auto', marginTop: '0.2rem' }}
-              />
-              <div>
-                <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#f8fafc' }}>Aposentadoria por Idade Geral (EC 103/2019) ★</div>
-                <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '0.2rem' }}>Idade mínima 62 anos (Mulher) / 65 (Homem), 100% PBC.</div>
+            {/* CARD SELEÇÃO DE MODALIDADE */}
+            <div className="card-panel">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', borderBottom: '1px solid #334155', paddingBottom: '0.75rem', marginBottom: '1rem' }}>
+                <span style={{ fontSize: '1.2rem' }}>⚙️</span>
+                <h2 style={{ fontSize: '0.85rem', fontWeight: 700, color: '#f8fafc', textTransform: 'uppercase', letterSpacing: '0.05em', margin: 0 }}>
+                  Modalidade de Cálculo Selecionada
+                </h2>
               </div>
-            </label>
 
-            <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', padding: '0.75rem', borderRadius: '0.75rem', border: modalidade === 'REVISAO_VIDA_TODA' ? '1px solid #3b82f6' : '1px solid #334155', backgroundColor: modalidade === 'REVISAO_VIDA_TODA' ? 'rgba(59, 130, 246, 0.1)' : 'transparent', cursor: 'pointer' }}>
-              <input
-                type="radio"
-                name="modalidade"
-                value="REVISAO_VIDA_TODA"
-                checked={modalidade === 'REVISAO_VIDA_TODA'}
-                onChange={(e) => {
-                  setModalidade(e.target.value)
-                  recalcularTudo(clienteNome, idadeAnos, sexo, tempoAnos, salarios, e.target.value)
-                }}
-                style={{ width: 'auto', marginTop: '0.2rem' }}
-              />
-              <div>
-                <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#f8fafc' }}>Revisão da Vida Toda (Tema 1102 STF)</div>
-                <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '0.2rem' }}>Histórico 1978-2026, 6 moedas, 80% maiores salários.</div>
-              </div>
-            </label>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.65rem' }}>
+                <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', padding: '0.75rem', borderRadius: '0.75rem', border: modalidade === 'APOSENTADORIA_COMUM' ? '1px solid #3b82f6' : '1px solid #334155', backgroundColor: modalidade === 'APOSENTADORIA_COMUM' ? 'rgba(59, 130, 246, 0.1)' : 'transparent', cursor: 'pointer' }}>
+                  <input
+                    type="radio"
+                    name="modalidade"
+                    value="APOSENTADORIA_COMUM"
+                    checked={modalidade === 'APOSENTADORIA_COMUM'}
+                    onChange={(e) => {
+                      setModalidade(e.target.value)
+                      recalcularTudo(clienteNome, idadeAnos, sexo, tempoAnos, salarios, e.target.value)
+                    }}
+                    style={{ width: 'auto', marginTop: '0.2rem' }}
+                  />
+                  <div>
+                    <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#f8fafc' }}>Aposentadoria por Idade Geral (EC 103/2019) ★</div>
+                    <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '0.2rem' }}>Idade mínima 62 anos (Mulher) / 65 (Homem), 100% PBC.</div>
+                  </div>
+                </label>
 
-            <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', padding: '0.75rem', borderRadius: '0.75rem', border: modalidade === 'INDENIZACAO_ATRASADOS' ? '1px solid #3b82f6' : '1px solid #334155', backgroundColor: modalidade === 'INDENIZACAO_ATRASADOS' ? 'rgba(59, 130, 246, 0.1)' : 'transparent', cursor: 'pointer' }}>
-              <input
-                type="radio"
-                name="modalidade"
-                value="INDENIZACAO_ATRASADOS"
-                checked={modalidade === 'INDENIZACAO_ATRASADOS'}
-                onChange={(e) => {
-                  setModalidade(e.target.value)
-                  recalcularTudo(clienteNome, idadeAnos, sexo, tempoAnos, salarios, e.target.value)
-                }}
-                style={{ width: 'auto', marginTop: '0.2rem' }}
-              />
-              <div>
-                <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#f8fafc' }}>Indenização de Atrasados (Art. 45-A)</div>
-                <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '0.2rem' }}>Isento de juros pré-10/1996. Pós-10/1996 com SELIC + 10% multa.</div>
+                <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', padding: '0.75rem', borderRadius: '0.75rem', border: modalidade === 'REVISAO_VIDA_TODA' ? '1px solid #3b82f6' : '1px solid #334155', backgroundColor: modalidade === 'REVISAO_VIDA_TODA' ? 'rgba(59, 130, 246, 0.1)' : 'transparent', cursor: 'pointer' }}>
+                  <input
+                    type="radio"
+                    name="modalidade"
+                    value="REVISAO_VIDA_TODA"
+                    checked={modalidade === 'REVISAO_VIDA_TODA'}
+                    onChange={(e) => {
+                      setModalidade(e.target.value)
+                      recalcularTudo(clienteNome, idadeAnos, sexo, tempoAnos, salarios, e.target.value)
+                    }}
+                    style={{ width: 'auto', marginTop: '0.2rem' }}
+                  />
+                  <div>
+                    <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#f8fafc' }}>Revisão da Vida Toda (Tema 1102 STF)</div>
+                    <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '0.2rem' }}>Histórico 1978-2026, 6 moedas, 80% maiores salários.</div>
+                  </div>
+                </label>
+
+                <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem', padding: '0.75rem', borderRadius: '0.75rem', border: modalidade === 'INDENIZACAO_ATRASADOS' ? '1px solid #3b82f6' : '1px solid #334155', backgroundColor: modalidade === 'INDENIZACAO_ATRASADOS' ? 'rgba(59, 130, 246, 0.1)' : 'transparent', cursor: 'pointer' }}>
+                  <input
+                    type="radio"
+                    name="modalidade"
+                    value="INDENIZACAO_ATRASADOS"
+                    checked={modalidade === 'INDENIZACAO_ATRASADOS'}
+                    onChange={(e) => {
+                      setModalidade(e.target.value)
+                      recalcularTudo(clienteNome, idadeAnos, sexo, tempoAnos, salarios, e.target.value)
+                    }}
+                    style={{ width: 'auto', marginTop: '0.2rem' }}
+                  />
+                  <div>
+                    <div style={{ fontSize: '0.8rem', fontWeight: 700, color: '#f8fafc' }}>Indenização de Atrasados (Art. 45-A)</div>
+                    <div style={{ fontSize: '0.7rem', color: '#94a3b8', marginTop: '0.2rem' }}>Isento de juros pré-10/1996. Pós-10/1996 com SELIC + 10% multa.</div>
+                  </div>
+                </label>
               </div>
-            </label>
+            </div>
+
+            {/* UPLOADER */}
+            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '1rem' }}>
+              <CnisPdfUploader onCnisDataParsed={handleCnisParsed} />
+            </div>
           </div>
+
+          {/* TABELA DE VÍNCULOS EMPREGATÍCIOS EXTRAÍDOS */}
+          <VinculosTable vinculos={vinculos} />
         </div>
+      )}
 
-        {/* UPLOADER & BOTÃO EXECUTAR */}
-        <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '1rem' }}>
-          <CnisPdfUploader onCnisDataParsed={handleCnisParsed} />
+      {/* ABA 2: SIMULAÇÃO & PLANILHA DATA GRID */}
+      {abaAtiva === 'simulacao' && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+          {/* PLANILHA DATA GRID */}
+          <DataGrid
+            salarios={salarios}
+            onUpdate={(updated) => {
+              setSalarios(updated)
+              recalcularTudo(clienteNome, idadeAnos, sexo, tempoAnos, updated, modalidade)
+            }}
+            onAddRow={handleAddRow}
+            onClear={handleClear}
+            onPreencherLote={handlePreencherLote}
+            onCarregarExemplo={() => {
+              const ex = [
+                { competencia: "1978-05", valor: 2750000000000, moeda: "Cr$" },
+                { competencia: "1985-05", valor: 1375000000000, moeda: "Cr$" },
+                { competencia: "1987-10", valor: 2750000000, moeda: "Cz$" },
+                { competencia: "1994-06", valor: 825000, moeda: "CR$" },
+                { competencia: "1994-07", valor: 500.00, moeda: "R$" },
+                { competencia: "2019-11", valor: 3500.00, moeda: "R$" },
+                { competencia: "2024-01", valor: 5500.00, moeda: "R$" }
+              ]
+              setSalarios(ex)
+              recalcularTudo(clienteNome, idadeAnos, sexo, tempoAnos, ex, modalidade)
+            }}
+          />
 
-          <button
-            onClick={handleCalcular}
-            className="btn-primary"
-          >
-            🚀 Executar Cálculo & Apurar RMI
-          </button>
+          {/* PAINEL DE RESULTADO DASHBOARD */}
+          {resultado && (
+            <div className="card-panel">
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #334155', paddingBottom: '0.75rem', marginBottom: '1rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span style={{ fontSize: '1.2rem' }}>🎉</span>
+                  <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#f8fafc', margin: 0 }}>
+                    Resultado Apurado da Simulação ({clienteNome})
+                  </h2>
+                </div>
+                <span className="badge-ok" style={{ fontSize: '0.75rem' }}>
+                  {resultado.modalidade}
+                </span>
+              </div>
+
+              <div className="grid-4">
+                
+                {/* RMI APURADA */}
+                <div className="stat-hero">
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                    <span style={{ fontSize: '0.7rem', textTransform: 'uppercase', fontWeight: 700, opacity: 0.9, letterSpacing: '0.05em' }}>
+                      RMI APURADA (R$)
+                    </span>
+                    <span className="has-tooltip">
+                      <span className="tooltip-icon" style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', color: '#ffffff', borderColor: 'rgba(255, 255, 255, 0.4)' }}>?</span>
+                      <span className="tooltip-box">
+                        <strong>Renda Mensal Inicial:</strong> Valor bruto mensal da aposentadoria pago pelo INSS. Se a média resultar abaixo do piso, o sistema garante o <strong>Piso do Salário Mínimo (R$ 1.518,00/mês)</strong>.
+                      </span>
+                    </span>
+                  </div>
+                  <div className="font-mono" style={{ fontSize: '1.8rem', fontWeight: 800, marginTop: '0.5rem' }}>
+                    R$ {Number(resultado.rmi_apurada).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  </div>
+                  <div style={{ fontSize: '0.65rem', opacity: 0.8, marginTop: '0.35rem' }}>Garantia do Piso Constitucional do INSS</div>
+                </div>
+
+                {/* MÉDIA DO PBC */}
+                <div style={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '1rem', padding: '1.25rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                    <span style={{ fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.05em' }}>
+                      Média do PBC
+                    </span>
+                    <span className="has-tooltip">
+                      <span className="tooltip-icon">?</span>
+                      <span className="tooltip-box">
+                        <strong>Período Básico de Cálculo:</strong> Média aritmética simples de todas as contribuições salariais registradas pós-07/1994, corrigidas pelo INPC.
+                      </span>
+                    </span>
+                  </div>
+                  <div className="font-mono" style={{ fontSize: '1.4rem', fontWeight: 700, color: '#f8fafc', marginTop: '0.5rem' }}>
+                    R$ {Number(resultado.media_pbc).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  </div>
+                  <div style={{ fontSize: '0.65rem', color: '#64748b', marginTop: '0.35rem' }}>Média de Salários Pós-07/1994</div>
+                </div>
+
+                {/* COEFICIENTE APLICADO */}
+                <div style={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '1rem', padding: '1.25rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                    <span style={{ fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.05em' }}>
+                      Coeficiente Aplicado
+                    </span>
+                    <span className="has-tooltip">
+                      <span className="tooltip-icon">?</span>
+                      <span className="tooltip-box">
+                        <strong>Percentual da Reforma (EC 103/2019):</strong> Base de 60% ao atingir o tempo mínimo + 2% por ano excedente (acima de 15a mulher / 20a homem).
+                      </span>
+                    </span>
+                  </div>
+                  <div className="font-mono" style={{ fontSize: '1.4rem', fontWeight: 700, color: '#f8fafc', marginTop: '0.5rem' }}>
+                    {(Number(resultado.coeficiente_aplicado) * 100).toFixed(0)}%
+                  </div>
+                  <div style={{ fontSize: '0.65rem', color: '#64748b', marginTop: '0.35rem' }}>Percentual Acumulado da Regra</div>
+                </div>
+
+                {/* SALÁRIOS NO PBC */}
+                <div style={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '1rem', padding: '1.25rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                    <span style={{ fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.05em' }}>
+                      Salários no PBC
+                    </span>
+                    <span className="has-tooltip">
+                      <span className="tooltip-icon">?</span>
+                      <span className="tooltip-box">
+                        <strong>Histórico de Contribuições:</strong> Indica a quantidade de salários computados na média do PBC sem descarte.
+                      </span>
+                    </span>
+                  </div>
+                  <div className="font-mono" style={{ fontSize: '1.4rem', fontWeight: 700, color: '#f8fafc', marginTop: '0.5rem' }}>
+                    {resultado.salarios_considerados_qtd} <span style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 400 }}>de {salarios.length}</span>
+                  </div>
+                  <div style={{ fontSize: '0.65rem', color: '#fbbf24', fontWeight: 600, marginTop: '0.35rem' }}>
+                    {resultado.salarios_descartados_qtd} descartados na regra
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          )}
         </div>
-      </div>
+      )}
 
-      {/* TABELA DE TESES COMPARATIVAS DAS REGRAS DE TRANSIÇÃO (EC 103/2019) */}
-      <TesesComparativasTable teses={teses} />
+      {/* ABA 3: TESES & REGRAS DE TRANSIÇÃO (EC 103/2019) */}
+      {abaAtiva === 'teses' && (
+        <TesesComparativasTable teses={teses} />
+      )}
 
-      {/* TABELA DE COMPLEMENTAÇÃO EXPLICITA SE ATIVADA */}
-      {mostrarComplementacao && (
+      {/* ABA 4: PLANEJAMENTO & GUIA DE CONTRIBUIÇÃO */}
+      {abaAtiva === 'planejamento' && (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+          {/* PLANEJAMENTO O QUE FALTA PARA APOSENTAR */}
+          <PlanejamentoAposentadoriaCard
+            nomeSegurado={clienteNome}
+            idadeAtual={idadeAnos}
+            tempoAtual={tempoAnos}
+            sexo={sexo}
+            dataNascimento={dataNascimento}
+            teses={teses}
+          />
+
+          {/* TABELA DE CONTRIBUIÇÃO FUTURA 1 A 5 SALÁRIOS & TETO */}
+          <TabelaPlanejamentoContribuicao />
+        </div>
+      )}
+
+      {/* ABA 5: GUIA DE COMPLEMENTAÇÃO (PREC-MENOR-MIN) */}
+      {abaAtiva === 'complementacao' && (
         <ComplementacaoTable itens={itensComplementacao} totalDarf={totalComplementarDarf} />
-      )}
-
-      {/* TABELA DE VÍNCULOS EMPREGATÍCIOS EXTRAÍDOS */}
-      <VinculosTable vinculos={vinculos} />
-
-      {/* PLANILHA DATA GRID */}
-      <DataGrid
-        salarios={salarios}
-        onUpdate={(updated) => {
-          setSalarios(updated)
-          recalcularTudo(clienteNome, idadeAnos, sexo, tempoAnos, updated, modalidade)
-        }}
-        onAddRow={handleAddRow}
-        onClear={handleClear}
-        onPreencherLote={handlePreencherLote}
-        onCarregarExemplo={() => {
-          const ex = [
-            { competencia: "1978-05", valor: 2750000000000, moeda: "Cr$" },
-            { competencia: "1985-05", valor: 1375000000000, moeda: "Cr$" },
-            { competencia: "1987-10", valor: 2750000000, moeda: "Cz$" },
-            { competencia: "1994-06", valor: 825000, moeda: "CR$" },
-            { competencia: "1994-07", valor: 500.00, moeda: "R$" },
-            { competencia: "2019-11", valor: 3500.00, moeda: "R$" },
-            { competencia: "2024-01", valor: 5500.00, moeda: "R$" }
-          ]
-          setSalarios(ex)
-          recalcularTudo(clienteNome, idadeAnos, sexo, tempoAnos, ex, modalidade)
-        }}
-      />
-
-      {/* PAINEL DE RESULTADO DASHBOARD COM TOOLTIPS INTERATIVOS DE AJUDA */}
-      {resultado && (
-        <div className="card-panel">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #334155', paddingBottom: '0.75rem', marginBottom: '1rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <span style={{ fontSize: '1.2rem' }}>🎉</span>
-              <h2 style={{ fontSize: '1.1rem', fontWeight: 800, color: '#f8fafc', margin: 0 }}>
-                Resultado Apurado da Simulação ({clienteNome})
-              </h2>
-            </div>
-            <span className="badge-ok" style={{ fontSize: '0.75rem' }}>
-              {resultado.modalidade}
-            </span>
-          </div>
-
-          <div className="grid-4">
-            
-            {/* RMI APURADA */}
-            <div className="stat-hero">
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                <span style={{ fontSize: '0.7rem', textTransform: 'uppercase', fontWeight: 700, opacity: 0.9, letterSpacing: '0.05em' }}>
-                  RMI APURADA (R$)
-                </span>
-                <span className="has-tooltip">
-                  <span className="tooltip-icon" style={{ backgroundColor: 'rgba(255, 255, 255, 0.2)', color: '#ffffff', borderColor: 'rgba(255, 255, 255, 0.4)' }}>?</span>
-                  <span className="tooltip-box">
-                    <strong>Renda Mensal Inicial:</strong> Valor bruto mensal da aposentadoria pago pelo INSS. Se a média resultar abaixo do piso, o sistema garante o <strong>Piso do Salário Mínimo (R$ 1.518,00/mês)</strong>.
-                  </span>
-                </span>
-              </div>
-              <div className="font-mono" style={{ fontSize: '1.8rem', fontWeight: 800, marginTop: '0.5rem' }}>
-                R$ {Number(resultado.rmi_apurada).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-              </div>
-              <div style={{ fontSize: '0.65rem', opacity: 0.8, marginTop: '0.35rem' }}>Garantia do Piso Constitucional do INSS</div>
-            </div>
-
-            {/* MÉDIA DO PBC */}
-            <div style={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '1rem', padding: '1.25rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                <span style={{ fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.05em' }}>
-                  Média do PBC
-                </span>
-                <span className="has-tooltip">
-                  <span className="tooltip-icon">?</span>
-                  <span className="tooltip-box">
-                    <strong>Período Básico de Cálculo:</strong> Média aritmética simples de todas as contribuições salariais registradas pós-07/1994, corrigidas pelo INPC.
-                  </span>
-                </span>
-              </div>
-              <div className="font-mono" style={{ fontSize: '1.4rem', fontWeight: 700, color: '#f8fafc', marginTop: '0.5rem' }}>
-                R$ {Number(resultado.media_pbc).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-              </div>
-              <div style={{ fontSize: '0.65rem', color: '#64748b', marginTop: '0.35rem' }}>Média de Salários Pós-07/1994</div>
-            </div>
-
-            {/* COEFICIENTE APLICADO */}
-            <div style={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '1rem', padding: '1.25rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                <span style={{ fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.05em' }}>
-                  Coeficiente Aplicado
-                </span>
-                <span className="has-tooltip">
-                  <span className="tooltip-icon">?</span>
-                  <span className="tooltip-box">
-                    <strong>Percentual da Reforma (EC 103/2019):</strong> Base de 60% ao atingir o tempo mínimo + 2% por ano excedente (acima de 15a mulher / 20a homem).
-                  </span>
-                </span>
-              </div>
-              <div className="font-mono" style={{ fontSize: '1.4rem', fontWeight: 700, color: '#f8fafc', marginTop: '0.5rem' }}>
-                {(Number(resultado.coeficiente_aplicado) * 100).toFixed(0)}%
-              </div>
-              <div style={{ fontSize: '0.65rem', color: '#64748b', marginTop: '0.35rem' }}>Percentual Acumulado da Regra</div>
-            </div>
-
-            {/* SALÁRIOS NO PBC */}
-            <div style={{ backgroundColor: '#0f172a', border: '1px solid #334155', borderRadius: '1rem', padding: '1.25rem' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                <span style={{ fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase', fontWeight: 700, letterSpacing: '0.05em' }}>
-                  Salários no PBC
-                </span>
-                <span className="has-tooltip">
-                  <span className="tooltip-icon">?</span>
-                  <span className="tooltip-box">
-                    <strong>Histórico de Contribuições:</strong> Indica a quantidade de salários computados na média do PBC sem descarte.
-                  </span>
-                </span>
-              </div>
-              <div className="font-mono" style={{ fontSize: '1.4rem', fontWeight: 700, color: '#f8fafc', marginTop: '0.5rem' }}>
-                {resultado.salarios_considerados_qtd} <span style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 400 }}>de {salarios.length}</span>
-              </div>
-              <div style={{ fontSize: '0.65rem', color: '#fbbf24', fontWeight: 600, marginTop: '0.35rem' }}>
-                {resultado.salarios_descartados_qtd} descartados na regra
-              </div>
-            </div>
-
-          </div>
-        </div>
       )}
 
       {/* MODAL DE AUDITORIA PREVIDENCIÁRIA */}
