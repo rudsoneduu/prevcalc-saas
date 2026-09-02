@@ -250,12 +250,8 @@ export default function HomePage() {
   }
 
   const handlePreencherLote = (tipo: 'MINIMO' | 'TETO') => {
-    const updated = salarios.map(s => {
-      if (!s.valor || s.valor === 0) {
-        return { ...s, valor: tipo === 'MINIMO' ? 1518.00 : 8157.41 }
-      }
-      return s
-    })
+    const valorAlvo = tipo === 'MINIMO' ? 1518.00 : 8157.41
+    const updated = salarios.map(s => ({ ...s, valor: valorAlvo }))
     setSalarios(updated)
     recalcularTudo(clienteNome, idadeAnos, sexo, tempoAnos, updated, modalidade)
   }
