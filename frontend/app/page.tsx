@@ -8,6 +8,7 @@ import { ComplementacaoTable, ItemComplementacaoProps } from '../components/Comp
 import { AuditoriaModal } from '../components/AuditoriaModal'
 import { TesesComparativasTable, TeseItem } from '../components/TesesComparativasTable'
 import { PlanejamentoAposentadoriaCard } from '../components/PlanejamentoAposentadoriaCard'
+import { TabelaPlanejamentoContribuicao } from '../components/TabelaPlanejamentoContribuicao'
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
 
@@ -353,6 +354,9 @@ export default function HomePage() {
         dataNascimento={dataNascimento}
         teses={teses}
       />
+
+      {/* NOVA TABELA DE PLANEJAMENTO DE CONTRIBUIÇÃO FUTURA (1 A 5 SALÁRIOS & TETO) */}
+      <TabelaPlanejamentoContribuicao />
 
       {/* PAINEL PERFIL DO SEGURADO E CONTROLES */}
       <div className="grid-3">
